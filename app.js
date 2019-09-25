@@ -5,6 +5,7 @@ const flash = require('connect-flash');
 const session = require('express-session')
 
 
+
 const app = express();
 
 //DBconfig
@@ -22,7 +23,16 @@ app.set('view engine', 'ejs');
 // Body parser
 app.use(express.urlencoded({extended: false}));
 
+// Express Session
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+  }));
 
+
+//Connecr flash
+app.use(flash());
 
 //Routes
 app.use('/', require('./routes/index')),
